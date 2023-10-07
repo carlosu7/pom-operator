@@ -7,11 +7,11 @@ POM Operator is a library responsible for injecting dependencies into POM files 
 
 ## Building
 
-Use [Maven](https://maven.apache.org):
+Use [Gradle](https://gradle.org/):
 
 ```
 $ git clone git@github.com:pixee/pom-operator.git && cd pom-operator
-$ mvn clean install
+$ gradle clean build
 ```
 
 ## Using
