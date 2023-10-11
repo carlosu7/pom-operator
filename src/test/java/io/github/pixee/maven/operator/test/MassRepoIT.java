@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.util.*;
 
-public class MassRepoITJ {
+public class MassRepoIT {
     private static final Logger LOGGER = LoggerFactory.getLogger(MassRepoIT.class);
 
     private static class TestRepo {

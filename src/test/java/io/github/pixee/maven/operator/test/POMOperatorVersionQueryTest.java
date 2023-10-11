@@ -6,8 +6,6 @@ import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
@@ -16,9 +14,9 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-public class POMOperatorVersionQueryTestJ {
+public class POMOperatorVersionQueryTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(POMOperatorVersionQueryTestJ.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(POMOperatorVersionQueryTest.class);
 
     @Test
     public void testBasicQuery() {

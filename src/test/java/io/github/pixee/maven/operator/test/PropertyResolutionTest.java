@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PropertyResolutionTestJ extends TestCase {
+public class PropertyResolutionTest extends TestCase {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyResolutionTest.class);
 

@@ -1,7 +1,6 @@
 package io.github.pixee.maven.operator.test;
 
 import io.github.pixee.maven.operator.*;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -26,16 +25,16 @@ import org.xmlunit.diff.Difference;
 
 import javax.xml.stream.XMLStreamException;
 
-public class POMOperatorTestJ extends AbstractTestBaseJ{
+public class POMOperatorTest extends AbstractTestBase {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(POMOperatorTestJ.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(POMOperatorTest.class);
 
     @Test(expected = DocumentException.class)
     public void testWithBrokenPom() throws Exception {
         gwt(
                 "broken-pom",
                 ProjectModelFactory.load(
-                        POMOperatorTestJ.class.getResource("broken-pom.xml")
+                        POMOperatorTest.class.getResource("broken-pom.xml")
                 ).withDependency(Dependency.fromString("org.dom4j:dom4j:2.0.3"))
         );
     }
@@ -49,7 +48,7 @@ public class POMOperatorTestJ extends AbstractTestBaseJ{
 
         File testPom = File.createTempFile("pom", ".xml");
 
-        try (InputStream inputStream = POMOperatorTestJ.class.getResourceAsStream("sample-bad-pom.xml");
+        try (InputStream inputStream = POMOperatorTest.class.getResourceAsStream("sample-bad-pom.xml");
              OutputStream outputStream = new FileOutputStream(testPom)) {
             byte[] buffer = new byte[1024];
             int bytesRead;
@@ -103,7 +102,7 @@ public class POMOperatorTestJ extends AbstractTestBaseJ{
         gwt(
                 "case-dependency-missing",
                 ProjectModelFactory.load(
-                        POMOperatorTestJ.class.getResource("pom-case-1.xml")
+                        POMOperatorTest.class.getResource("pom-case-1.xml")
                 )
         );
     }
@@ -112,7 +111,7 @@ public class POMOperatorTestJ extends AbstractTestBaseJ{
     public void testCaseOne() throws Exception {
 
         ProjectModelFactory projectModelFactory = ProjectModelFactory.load(
-                POMOperatorTestJ.class.getResource("pom-case-1.xml")
+                POMOperatorTest.class.getResource("pom-case-1.xml")
             ).withDependency(Dependency.fromString("org.dom4j:dom4j:2.0.3"));
         ProjectModel context = gwt("case-1", projectModelFactory);
 
@@ -132,7 +131,7 @@ public class POMOperatorTestJ extends AbstractTestBaseJ{
         );
         Assert.assertTrue("diff contains a <dependency> tag", textDiff.contains("<dependency>"));
 
-        Document effectivePom = UtilT.getEffectivePom(context);
+        Document effectivePom = UtilForTests.getEffectivePom(context);
 
         System.out.println("effectivePom: " + effectivePom.asXML());
     }
@@ -150,7 +149,7 @@ public class POMOperatorTestJ extends AbstractTestBaseJ{
 
 
         ProjectModelFactory projectModelFactory = ProjectModelFactory.load(
-                POMOperatorTestJ.class.getResource("pom-case-3.xml")
+                POMOperatorTest.class.getResource("pom-case-3.xml")
             ).withDependency(dependencyToUpgradeOnCaseThree).withSkipIfNewer(false);
         ProjectModel context = gwt("case-3", projectModelFactory);
 
@@ -192,7 +191,7 @@ public class POMOperatorTestJ extends AbstractTestBaseJ{
         ProjectModel context = gwt(
                 "pom-case-three-with-lower-version",
                 ProjectModelFactory.load(
-                        POMOperatorTestJ.class.getResource("pom-case-3.xml")
+                        POMOperatorTest.class.getResource("pom-case-3.xml")
             ).withDependency(dependencyToUpgrade).withSkipIfNewer(true)
         );
 
@@ -204,7 +203,7 @@ public class POMOperatorTestJ extends AbstractTestBaseJ{
 
     @Test
     public void testCase4() throws Exception {
-        File pomPath = new File(POMOperatorTestJ.class.getResource("webgoat-parent.xml").toURI());
+        File pomPath = new File(POMOperatorTest.class.getResource("webgoat-parent.xml").toURI());
 
         List<String> args = new ArrayList<>();
         if (SystemUtils.IS_OS_WINDOWS) {
@@ -236,7 +235,7 @@ public class POMOperatorTestJ extends AbstractTestBaseJ{
 
         ProjectModel context = gwt("case-4",
                 ProjectModelFactory.load(
-                        POMOperatorTestJ.class.getResource("pom-case-4.xml")
+                        POMOperatorTest.class.getResource("pom-case-4.xml")
             ).withDependency(dependencyToUpgrade));
 
         Diff diff = getXmlDifferences(context.getPomFile().getPomDocument(), context.getPomFile().getResultPom());
@@ -244,7 +243,7 @@ public class POMOperatorTestJ extends AbstractTestBaseJ{
         Assert.assertTrue("Document has differences", diff.hasDifferences());
         Assert.assertTrue( "Original POM File is Dirty", context.getPomFile().getDirty());
 
-        Document effectivePom = UtilT.getEffectivePom(context);
+        Document effectivePom = UtilForTests.getEffectivePom(context);
 
         Assert.assertFalse("Dependencies Section did change", Util.selectXPathNodes(effectivePom, Util.buildLookupExpressionForDependency(dependencyToUpgrade)).isEmpty());
     }
@@ -263,7 +262,7 @@ public class POMOperatorTestJ extends AbstractTestBaseJ{
         ProjectModel context = gwt(
                 "case-5",
                 ProjectModelFactory.load(
-                        POMOperatorTestJ.class.getResource("pom-case-5.xml")
+                        POMOperatorTest.class.getResource("pom-case-5.xml")
             ).withDependency(dependencyToUpgrade).withUseProperties(true)
         );
 
@@ -310,7 +309,7 @@ public class POMOperatorTestJ extends AbstractTestBaseJ{
         ProjectModel context = gwt(
                 "case-6",
                 ProjectModelFactory.load(
-                        POMOperatorTestJ.class.getResource("pom-case-6.xml")
+                        POMOperatorTest.class.getResource("pom-case-6.xml")
             ).withDependency(dependencyToUpgrade).withUseProperties(true)
         );
 
@@ -350,7 +349,7 @@ public class POMOperatorTestJ extends AbstractTestBaseJ{
         ProjectModel context = gwt(
                 "case-with-property",
                 ProjectModelFactory.load(
-                        POMOperatorTestJ.class.getResource("pom-with-property-simple.xml")
+                        POMOperatorTest.class.getResource("pom-with-property-simple.xml")
             ).withDependency(dependencyToUpgrade).withUseProperties(true).withSkipIfNewer(true)
         );
 
@@ -538,7 +537,7 @@ public class POMOperatorTestJ extends AbstractTestBaseJ{
         ProjectModel context = gwt(
                 "hack23-cia",
                 ProjectModelFactory.load(
-                        POMOperatorTestJ.class.getResource("pom-hack23-cia.xml")
+                        POMOperatorTest.class.getResource("pom-hack23-cia.xml")
             ).withDependency(dependencyToUpgrade).withUseProperties(true)
         );
 

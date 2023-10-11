@@ -6,19 +6,16 @@ import io.github.pixee.maven.operator.ProjectModel;
 import io.github.pixee.maven.operator.ProjectModelFactory;
 import org.dom4j.DocumentException;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertTrue;
 
-public class POMScannerTestJ extends AbstractTestBaseJ {
+public class POMScannerTest extends AbstractTestBase {
     private final File currentDirectory = new File(System.getProperty("user.dir"));
 
     @Test

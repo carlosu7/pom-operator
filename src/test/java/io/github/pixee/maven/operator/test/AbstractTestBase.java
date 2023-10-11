@@ -25,7 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 
-public class AbstractTestBaseJ {
+public class AbstractTestBase {
     protected static final Logger LOGGER = LoggerFactory.getLogger(POMOperatorTest.class);
 
     protected File getResource(String name) throws URISyntaxException {
@@ -44,7 +44,7 @@ public class AbstractTestBaseJ {
     protected ProjectModel gwt(String testName, ProjectModel context) throws Exception {
 
         String resultFile = "pom-" + testName + "-result.xml";
-        URL resource = AbstractTestBaseJ.class.getClass().getResource(resultFile);
+        URL resource = AbstractTestBase.class.getClass().getResource(resultFile);
 
         if (resource != null) {
             Document outcome = new SAXReader().read(resource);
@@ -55,7 +55,7 @@ public class AbstractTestBaseJ {
                     getXmlDifferences(context.getPomFile().getResultPom(), outcome).hasDifferences()
             );
         } else {
-            Path resultFilePath = Paths.get("src/test/resources/", AbstractTestBaseJ.class.getPackage().getName().replace(".", "/"), resultFile);
+            Path resultFilePath = Paths.get("src/test/resources/", AbstractTestBase.class.getPackage().getName().replace(".", "/"), resultFile);
 
             POMOperator.modify(context);
 

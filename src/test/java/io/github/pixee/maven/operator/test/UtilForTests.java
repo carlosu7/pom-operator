@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UtilT {
+public class UtilForTests {
     public static Map<String, String> getRuntimeResolvedProperties(ProjectModel projectModel) throws IOException {
         Document effectivePom = getEffectivePom(projectModel);
         List<Element> propertyElements = effectivePom.getRootElement().element("properties").elements();
