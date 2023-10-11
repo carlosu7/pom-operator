@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertTrue;
 
-public class POMScannerTestJ extends AbstractTestBase {
+public class POMScannerTestJ extends AbstractTestBaseJ {
     private final File currentDirectory = new File(System.getProperty("user.dir"));
 
     @Test

@@ -26,7 +26,7 @@ import org.xmlunit.diff.Difference;
 
 import javax.xml.stream.XMLStreamException;
 
-public class POMOperatorTestJ extends AbstractTestBase{
+public class POMOperatorTestJ extends AbstractTestBaseJ{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(POMOperatorTestJ.class);
 
@@ -525,7 +525,7 @@ public class POMOperatorTestJ extends AbstractTestBase{
     }
 
     @Test
-    public void testCaseWithEmptyElementFromCustomer() throws DocumentException, IOException, URISyntaxException {
+    public void testCaseWithEmptyElementFromCustomer() throws Exception {
         Dependency dependencyToUpgrade = new Dependency(
                 "io.github.pixee",
                 "java-security-toolkit",
